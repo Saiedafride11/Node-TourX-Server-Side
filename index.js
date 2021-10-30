@@ -28,16 +28,23 @@ async function run() {
       res.send(tours)
     })
 
-    // POST API Tours
-    app.post('/orders', async (req, res) => {
-        const order = req.body;
-        const result = await ordersCollection.insertOne(order)
-        res.json(result)
+    // POST API
+    app.post("/tours", async (req, res) => {
+      const tours= req.body;
+      const tour = await toursCollection.insertOne(tours)
+      res.json(tour)
     })
 
     // ---------------------------------------------------------
-    // ------------------- Orders  -----------------------------
+    // ------------------- ordersCollection  -----------------------------
     // ---------------------------------------------------------
+
+    // POST API Tours
+    app.post('/orders', async (req, res) => {
+      const order = req.body;
+      const result = await ordersCollection.insertOne(order)
+      res.json(result)
+  })
 
     //GET API Tours
     app.get('/orders', async (req, res) => {
