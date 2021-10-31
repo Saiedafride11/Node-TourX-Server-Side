@@ -73,7 +73,6 @@ async function run() {
         };
         const result = await ordersCollection.updateOne(query, updateDoc, options);
         res.json(result);
-        console.log('result Missing');
     })
 
     // Delete API Orders Id
