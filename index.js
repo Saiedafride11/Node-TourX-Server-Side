@@ -20,7 +20,7 @@ async function run() {
     const toursCollection = database.collection("tours");
     const ordersCollection = database.collection("orders");
     
-     //GET API Tours
+    //GET API Tours
      app.get('/tours', async (req, res) => {
       const cursor = toursCollection.find({})
       const tours = await cursor.toArray();
