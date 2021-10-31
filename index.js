@@ -38,21 +38,21 @@ async function run() {
     // ------------------- ordersCollection  -----------------------------
     // ---------------------------------------------------------
 
-    // POST API Tours
+    // POST API Orders
     app.post('/orders', async (req, res) => {
       const order = req.body;
       const result = await ordersCollection.insertOne(order)
       res.json(result)
   })
 
-    //GET API Tours
+    //GET API Orders
     app.get('/orders', async (req, res) => {
       const cursor = ordersCollection.find({})
       const orders = await cursor.toArray()
       res.send(orders)
     })
 
-    // GET API Tours Id
+    // GET API Orders Id
     app.get('/orders/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id)};
@@ -60,7 +60,23 @@ async function run() {
       res.send(tour);
     })
 
-    // Delete API Tours Id
+    // Update Status Orders
+    app.put('/orders/:id', async (req, res) => {
+          const id = req.params.id;
+          const query = { _id: ObjectId(id)};
+          const status = req.body.status;
+          const options = { upsert: true };
+          const updateDoc = {
+          $set: {
+            status: status
+          },
+        };
+        const result = await ordersCollection.updateOne(query, updateDoc, options);
+        res.json(result);
+        console.log('result Missing');
+    })
+
+    // Delete API Orders Id
     app.delete('/orders/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id)};
